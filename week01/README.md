@@ -19,9 +19,10 @@ mkdir -p assignments/ex1/outputs
 
 **Resulting Structure:**
 ```text
-assignments/
-└── ex1/
-    └── outputs/
+├── README.md
+└── assignments
+    └── ex1
+        └── outputs
 ```
 
 
@@ -29,18 +30,19 @@ assignments/
 
 ```bash
 # Using full paths and the touch command
-touch assignments/file1.txt assignments/ex1/file2.txt assignments/ex1/outputs/{file3.txt, file4.txt}
+touch assignments/file1.txt assignments/ex1/file2.txt assignments/ex1/outputs/{file3.txt,file4.txt}
 ```
 
 **Resulting Structure:**
 ```text
-assignments/
-├── file1.txt
-└── ex1/
-    ├── file2.txt
-    └── outputs/
-        ├── file3.txt
-        └── file4.txt
+├── README.md
+└── assignments
+    ├── ex1
+    │   ├── file2.txt
+    │   └── outputs
+    │       ├── file3.txt
+    │       └── file4.txt
+    └── file1.txt
 ```
 
 
