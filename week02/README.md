@@ -63,13 +63,12 @@ After visualing the genome in IGV:
 ![igvft](images/igvft.png)
 
 ### Strand orientation
-* Let's look at features colored by their strand orientation.
-    Individually:
+#### Let's look at features colored by their strand orientation. Individually:
 
 ![igvcol1](images/igvcol1.png)
 ![igvcol2](images/igvcol2.png)
 
-    Now, both strands at once:
+#### Now, both strands at once:
     
 ![igvcol3](images/igvcol3.png)
 
