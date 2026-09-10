@@ -34,7 +34,7 @@ Once the make command finishes successfully, you can explore the genome and gene
 
 After visualing the genome in IGV:
 
-* How tightly packed are the genes in this genome? Estimate the gene-to-gene distance via the browser.
+### * How tightly packed are the genes in this genome? Estimate the gene-to-gene distance via the browser.
     * Based on the characterized genes, the genome seems quite tightly packed with gene-to-gene distances ranging from 6-89 kb. See below:
 
 ![igv1](images/igv1.png)
@@ -44,21 +44,34 @@ After visualing the genome in IGV:
 ![igv5](images/igv5.png)
 
 
-* Now, visually inspect the sequence regions around a coordinate on the chromosome and all six reading frames (codons) that the coordinate could be part of.
-
+### Reading frames
+* As shown below, the six possible reading frames (codons) of the coordinate on the chromosome below are:
+    - DQNSFTT...
+    - IKILSQR...
+    - SKFFHND...
+    - DFNK*LS...
+    - ILIRECR...
+    - *FEKVVV...
+    
 ![igvrf1](images/igvrf1.png)
 ![igvrf2](images/igvrf2.png)
-![igvrf4](images/igvrf3.png)
-![igvrf4](images/igvrf4.png)
 
-* The type of feature displayed below is a gene, specifically the protein coding hydroxylysine kinase gene.
+
+### Data track
+* The type of feature displayed below is a gene, specifically the protein coding hydroxylysine kinase gene. This is visible via the annotation track.
 
 ![igvft](images/igvft.png)
 
+### Strand orientation
 * Let's look at features colored by their strand orientation.
+    Individually:
 
 ![igvcol1](images/igvcol1.png)
 ![igvcol2](images/igvcol2.png)
+
+    Now, both strands at once:
+    
+![igvcol3](images/igvcol3.png)
 
 
 
