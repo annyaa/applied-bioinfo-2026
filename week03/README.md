@@ -75,9 +75,13 @@ make: *** [download-genome] Error 1
 
 Gemini AI then recommended replacing the makefile with a completely different script, which I have done and pushed to my fork. Additionally, as I am aware that Victoria's device is a Windows laptop, I probed the AI Agent further to verify how this could work for Windows. It seems that as long as the device has WSL and dependencies installed, it should work. I also confirmed from the week 1 setup instructions that windows users were instructed to do this. 
 
-#### Once I pasted the updated script in the makefile, I was able to successfully execute `make` as seen in th screenshot below:
+#### Once I pasted the updated script in the makefile, I was able to successfully execute `make` as seen in the screenshot below:
 
 ![collab2](images/collab2.png)
+
+Here is an IGV visualization from the Tawny Owl genome:
+
+![collab3](images/collab3.png)
 
 Finally, I commit and push the change to the fork, create a pull request to the original repository on the GitHub interface so the author will review the pull request and merge it if they agree with the changes.
 
