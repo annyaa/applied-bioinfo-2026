@@ -29,22 +29,20 @@ This genome has **13, 840** datasets available in SRA.
 I am surprised by how many larval studies there are. Additionally, it is interesting to see so many efforts to characterize the mosquito virome. 
 
 
+## Download FASTQ files for an experiment
+In the Makefile are commands for downloading a subset of reads from the SRA based on an accession number. This will **not** download the entire dataset. Instead we obtain just a subset defined by an N parameter (the number of reads to download).
+
+
+# Quality control
+
+## The following steps were performed for quality control: 
+- Run a QC visualization on the downloaded reads to generate a report.
+- Apply a QC method to the reads to see whether it makes a visual difference.
+- Run a QC visualization on the trimmed reads to generate a report.
 
 
 
-Download FASTQ files for an experiment¶
-Add commands to your Makefile so that it can download a subset of reads from the SRA based on an accession number. Don't download the entire dataset, just a subset defined by an N parameter (the number of reads to download).
+## Discuss whether the QC step made a difference
 
-The Makefile should download the first N reads from an SRR accession.
-Place the files in directories named after the data type.
-Run a QC visualization on the downloaded reads to generate a report.
-Apply a QC method to the reads to see whether it makes a visual difference.
-Run a QC visualization on the trimmed reads to generate a report.
-Discuss whether the QC step made a difference.
 
-Make your Makefile generic enough to download reads from different sequencing platforms by changing the accession number alone.
 
-Recommendation¶
-Rename the FASTQ files from SRR numbers to more descriptive names that are easier to read.
-
-The metadata fields usually carry information about the sample name.
