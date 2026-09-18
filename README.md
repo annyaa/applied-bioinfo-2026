@@ -7,7 +7,7 @@ Use the links below to navigate to the directories for each week of BMMB 852:
 * [Week 1: Set up your system and demonstrate basic UNIX command line actions](./week01)
 * [Week 2: Visualize genomic data](./week02)
 * [Week 3: Collaborate with others](./week03)
-* [Week 4: Topic TBD](./week04)
+* [Week 4: Obtain FASTQ data from SRA](./week04)
 * [Week 5: Topic TBD](./week05)
 * [Week 6: Topic TBD](./week06)
 * [Week 7: Topic TBD](./week07)
