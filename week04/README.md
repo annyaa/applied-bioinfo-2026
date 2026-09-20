@@ -47,7 +47,7 @@ Upon inspecting the fatsp and multiqc reports, I do not think the QC step made a
 
 
 ## How to replicate the above 
-Activate bioinfo and run `pixi add multiqc` before running the make command as follows:
+Activate bioinfo and run `pixi add multiqc` before running the `make` command as follows:
 
 ```
 make qc ACCESSION=SRR40532399 SAMPLE_NAME=Aedes_albo_samp1 N=100000
