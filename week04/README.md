@@ -1,5 +1,5 @@
 # Obtaining FASTQ data from SRA
-This week, we will locate and download FASTQ files for *Aedes albopictus* genome, which we selected and visualized in week 2. 
+This week, we will locate and download FASTQ files for the *Aedes albopictus* genome, which we selected and visualized in week 2. 
 
 ## Assessing the experimental evidence for the *Aedes albopictus* genome
 This genome has **13, 840** datasets available in SRA.
@@ -41,8 +41,14 @@ In the Makefile are commands for downloading a subset of reads from the SRA base
 - Run a QC visualization on the trimmed reads to generate a report.
 
 
+## Did the QC step make a difference?
 
-## Discuss whether the QC step made a difference
+Upon inspecting the fatsp and multiqc reports, I do not think the QC step made a difference. I examined metrics such as the read quality, sequence quality, base contents, kmer counts and N content.
 
 
+## How to replicate the above 
+Activate bioinfo and run `pixi add multiqc` before running the make command as follows:
 
+```
+make qc ACCESSION=SRR40532399 SAMPLE_NAME=Aedes_albo_samp1 N=100000
+```
