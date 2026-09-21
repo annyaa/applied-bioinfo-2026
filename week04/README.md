@@ -1,5 +1,5 @@
 # Obtaining FASTQ data from SRA
-This week, we will locate and download FASTQ files for the *Aedes albopictus* genome, which we selected and visualized in week 2. 
+This week, we will locate and download FASTQ files for the *Aedes albopictus* genome, which we selected and visualized in week 2. The NCBI RefSeq assembly is `GCF_035046485.1`.
 
 ## Assessing the experimental evidence for the *Aedes albopictus* genome
 This genome has **13, 840** datasets available in SRA.
