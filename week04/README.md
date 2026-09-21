@@ -30,7 +30,7 @@ I am surprised by how many larval studies there are. Additionally, it is interes
 
 
 ## Download FASTQ files for an experiment
-In the Makefile are commands for downloading a subset of reads from the SRA based on an accession number. This will **not** download the entire dataset. Instead we obtain just a subset defined by an N parameter (the number of reads to download).
+In the Makefile are commands for downloading a subset of reads from the SRA based on an accession number **(SRR40532399)**. The project number is `PRJNA1524040`. This will **not** download the entire dataset. Instead we obtain just a subset defined by an N parameter (the number of reads to download).
 
 
 # Quality control
