@@ -11,6 +11,7 @@ C = LN / G
 C = target coverage = 10
 L = read length = 150 per read = 2 x 150 = 300 for paired end
 G = genome length = 1.3 Gb for our reference [Aalb5](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_035046485.1/)
+
 N = read length = ?
 
 CG = LN; N = CG / L
