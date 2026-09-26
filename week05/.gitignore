@@ -1,6 +1,7 @@
 fastq/
 bam/
 fasta/
+ref/
 multiqc_data/
 multiqc_report.html
 fastp.html
