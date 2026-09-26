@@ -7,7 +7,7 @@ GCF_URL = https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/031/101/955/GCA_031101955
 GENOME_NAME = dengue_virus
 
 # name of the genome FASTA file on my machine
-GENOME_FASTA = ref/$(GENOME_NAME).fasta
+GENOME_FASTA = fasta/$(GENOME_NAME).fasta
 
 #SRA run accession number
 SRR = SRR35818859
@@ -78,10 +78,11 @@ $(BAM): $(INDEX) $(TRIM_1) $(TRIM_2)
 	mkdir -p $(dir $@)
 	bwa mem $(GENOME_FASTA) $(TRIM_1) $(TRIM_2) | samtools sort -o $@
 	samtools index $@
-	samtools flagstat $@
+	samtools flagstat $@ > bam/$(SAMPLE_NAME)_flagstat.txt
+	samtools coverage $@ > bam/$(SAMPLE_NAME)_coverage.txt
 
 # Quality Control
-qc: $(TRIM_1) $(TRIM_2)
+qc: $(TRIM_1) $(TRIM_2) $(BAM)
 	seqkit stats fastq/$(SAMPLE_NAME)*.fastq > fastq/$(SAMPLE_NAME)_stats.txt
 	fastqc fastq/$(SAMPLE_NAME)*.fastq
 	multiqc .

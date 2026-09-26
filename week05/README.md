@@ -21,31 +21,61 @@ We obtain over 43 million so we need to pivot to a different genome as this geno
 
 We pivot to using Dengue Virus Serotype 4(DENV4), a pathogen which *Ae. albopictus* is a competent vector of. It has a genome size of 10.8kb. 
 
-## Accession information for Wolbachia
-The genome accession (NCBI RefSeq assembly) is GCA_031101955.1
-The project accession is PRJNA1346681
-From that project I chose run SRR35818859
 
+## Accession information for Dengue Virus (DENV)
+- The genome accession (NCBI RefSeq assembly) is GCA_031101955.1
+- The project accession is PRJNA1346681
+- From that project I chose run SRR35818859
 
-## New selection of number of reads
+## New selection calculation for number of reads with DENV
 N = 10 (10800) / (102 + 104) = 524.2718447
 
 524 is very low compared to 43 million! Let's use 20 000 as we did in class. 
 
-Write a Makefile that aligns the reads and creates a BAM file.
-Run a statistics report on the BAM file.
-Visualize the BAM file in IGV.
+# Examine read alignment
+Run statistics on the bam files by running the following in terminal
+
+```
+samtools flagstat bam/denv4_samp1.bam > bam/denv4_samp1_flagstat.txt
+
+samtools coverage bam/denv4_samp1.bam > bam/denv4_samp1_coverage.txt
+```
+
+Read the generated reports by running the following in the terminal:
+
+```
+cat bam/denv4_samp1_flagstat.txt
+cat bam/denv4_samp1_coverage.txt
+```
+
+## Visualize the BAM file in IGV.
+Below is a screenshot of the BAM file in IGV. We can see what the alignments look like and whether reads show errors or variations.
+
+![bam2](images/bam2.png)
+
+![bam3](images/bam3.png)
 
 
+## Read alignment statistics
+- Based on samtools,** 2.34%** of the reads align.
 
-Write a README.md that a reviewer can follow. What to put in the README
-Explain how you arrived at N
-What percent of the reads align?
-What do the alignments look like? Do the reads show errors or variations?
-Is the coverage uniform?
-Include the commands needed to run the Makefile and a screenshot of the BAM file in IGV.
-Visualize the BAM file - The BAM file contains a wealth of information. In subsequent chapters we will explore what we can do with it. For now, visualize your well-earned BAM file in IGV.
+### Is the coverage uniform?
 
-Start IGV and load the genome as a reference. Then load the BAM file as a track. In my case, I see the following:
+```
+samtools depth bam/denv4_samp1.bam | awk '{if(min==""){min=$3}; if($3>max) {max=$3}; if($3<min) {min=$3}; total+=$3; count++} END {print "Min Depth: " min "\nMax Depth: " max "\nAverage: " total/count}'
+```
+
+![bam1](images/bam1.png)
+
+The spread of read depth indicates high variance and skewness which suggests coverage is non-uniform.
+
+## How to run the makefile 
+Run the following:
+
+```
+make all
+```
+
+
 
 
