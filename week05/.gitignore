@@ -1,0 +1,7 @@
+fastq/
+bam/
+fasta/
+multiqc_data/
+multiqc_report.html
+fastp.html
+fastp.json
