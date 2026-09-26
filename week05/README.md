@@ -4,13 +4,13 @@ Next up, is aligning the reads to the genome and creating a BAM alignment file.
 ## Choosing the number of reads (N) to align
 We will work with a subset of N reads, not the whole dataset. Using the genome size and the sequencing data properties, estimate the N number of reads you should download to get a coverage of at least 10x. Th goal is to check whether the number we obtain for *Aedes albopictus* is more than a million.
 
-We use the formula below for the calculation. It is the Lander/Waterman equation found at this [link] (https://www.illumina.com/documents/products/technotes/technote_coverage_calculation.pdf):
+We use the formula below for the calculation. It is the Lander/Waterman equation found at this [link](https://www.illumina.com/documents/products/technotes/technote_coverage_calculation.pdf):
 
 C = LN / G
 
 C = target coverage = 10
 L = read length = 150 per read = 2 x 150 = 300 for paired end
-G = genome length = 1.3 Gb for our reference [Aalb5] (https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_035046485.1/)
+G = genome length = 1.3 Gb for our reference [Aalb5](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_035046485.1/)
 N = read length = ?
 
 CG = LN; N = CG / L
