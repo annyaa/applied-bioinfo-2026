@@ -9,7 +9,7 @@ Use the links below to navigate to the directories for each week of BMMB 852:
 * [Week 3: Collaborate with others](./week03)
 * [Week 4: Obtain FASTQ data from SRA](./week04)
 * [Week 5: Generate a BAM file](./week05)
-* [Week 6: Topic TBD](./week06)
+* [Week 6: Evaluate structural variants](./week06)
 * [Week 7: Topic TBD](./week07)
 * [Week 8: Topic TBD](./week08)
 * [Week 9: Topic TBD](./week09)
