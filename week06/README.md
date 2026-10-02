@@ -30,6 +30,7 @@ Group by pair orientation
 
 ![eval5](images/eval5.png)
 
+From visual inspection, we see that it is likely there is the presence of insertions. Some inserts are larger than expected (red colored) and others are smaller than expected (colored blue). 
 
 ## Evaluate Sample 2
 [link](https://data.biostarhandbook.com/courses/2026-appbio/igv/bam/sample_2.bam)
@@ -62,6 +63,8 @@ Nucleotides zoomed in
 
 ![eval12](images/eval12.png)
 
+Indication that multiple insertions are present. Mismatched bases are shown in color. Mostly red coloring (larger inserts than expected) and very rarely blue 9smaller insert than expected). 
+
 
 ## Evaluate Sample 3 
 [link](https://data.biostarhandbook.com/courses/2026-appbio/igv/bam/sample_3.bam)
@@ -86,6 +89,7 @@ Group by pair orientation
 
 ![eval17](images/eval17.png)
 
+Read pairs primarily indicate the presence of duplication (green) and a few red inserts (larger than expected).
 
 ## Evaluate Sample 4
 [link](https://data.biostarhandbook.com/courses/2026-appbio/igv/bam/sample_4.bam)
@@ -116,6 +120,8 @@ Group by pair orientation
 
 ![eval25](images/eval25.png)
 
+When viewed as pairs, we see in teal paired reads that are both unexpectedly aligned in the 'right' direction while in blue are those unexpectedly assigned in the 'left' direction, indicating a possible inversion. When colored by insert size and grouped by pair orientation, we see the 'I' that indicates insertions compared to the reference.
+
 
 ## Evaluate Sample 5 
 [link](https://data.biostarhandbook.com/courses/2026-appbio/igv/bam/sample_5.bam)
@@ -140,8 +146,7 @@ Group by pair orientation
 
 ![eval30](images/eval30.png)
 
-
-
+Read pairs indicate that inserts larger than exopected (shown in red), those smaller than expected(blue) and duplications (green) may be present. 
 
 
 
