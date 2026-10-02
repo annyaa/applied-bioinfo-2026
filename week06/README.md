@@ -63,7 +63,7 @@ Nucleotides zoomed in
 
 ![eval12](images/eval12.png)
 
-Indication that multiple insertions are present. Mismatched bases are shown in color. Mostly red coloring (larger inserts than expected) and very rarely blue 9smaller insert than expected). 
+Indication that multiple insertions are present. Mismatched bases are shown in color. Mostly red coloring (larger inserts than expected) and very rarely blue (smaller insert than expected). 
 
 
 ## Evaluate Sample 3 
