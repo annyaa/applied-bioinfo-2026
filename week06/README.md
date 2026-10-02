@@ -146,7 +146,7 @@ Group by pair orientation
 
 ![eval30](images/eval30.png)
 
-Read pairs indicate that inserts larger than exopected (shown in red), those smaller than expected(blue) and duplications (green) may be present. 
+Read pairs indicate that inserts larger than expected (shown in red), those smaller than expected(blue) and duplications (green) may be present. 
 
 
 
