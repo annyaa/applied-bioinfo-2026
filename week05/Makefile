@@ -1,7 +1,7 @@
 # Parameter definitions to match repository info & enhance trackability
 
 # URL of reference
-GCF_URL = https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/031/101/955/GCA_031101955.1_ASM3110195v1/GCA_031101955.1_ASM3110195v1_genomic.fna.gz
+GCF_URL = https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/862/125/GCF_000862125.1_ViralProj15306/GCF_000862125.1_ViralProj15306_genomic.fna.gz
 
 # Name of ref
 GENOME_NAME = dengue_virus
@@ -9,8 +9,8 @@ GENOME_NAME = dengue_virus
 # name of the genome FASTA file on my machine
 GENOME_FASTA = fasta/$(GENOME_NAME).fasta
 
-#SRA run accession number
-SRR = SRR35818859
+#SRA run accession number (changed from SRR35818859)
+SRR = SRR35818875
 
 # Number of reads to download
 N = 20000
