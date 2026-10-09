@@ -53,15 +53,14 @@ This generates the following graphs:
 
 **Below are some details from the statistics report**
  
-- Number of variants called (records): 701
+- Number of variants called (records): **701**
 
-- Kinds of variants present: All **701** variants are SNPs
+- Kinds of variants present: All **701** variants are **SNPs**
 
-Which calls look like true variants, and which look like errors?
+- The calls like true variants (not errors).
 
-- Are the calls supported by the alignments?
-The alignments indicate substitutions which support the calls as seen in the pileup. Example below
+- The alignments indicate substitutions which support the calls as seen in the pileup. Example below:
 
-![vcf5](images/vcf5.png)
+![vcf10](images/vcf10.png)
 
 
