@@ -44,11 +44,11 @@ plot-vcfstats stats.txt vcf/
 ```
 This generates the following graphs:
 
-![vcf7](vcf_plots/tstv_by_qual.0.png)
+![vcf7](images/vcf7.png)
 
-![vcf8](vcf_plots/substitutions.0.png)
+![vcf8](images/vcf8.png)
 
-![vcf9](vcf_plots/depth.0.png)
+![vcf9](images/vcf9.png)
 
 
 **Below are some details from the statistics report**
@@ -58,7 +58,10 @@ This generates the following graphs:
 - Kinds of variants present: All **701** variants are SNPs
 
 Which calls look like true variants, and which look like errors?
-Are the calls supported by the alignments?
 
+- Are the calls supported by the alignments?
+The alignments indicate substitutions which support the calls as seen in the pileup. Example below
+
+![vcf5](images/vcf5.png)
 
 
