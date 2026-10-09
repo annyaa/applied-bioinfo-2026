@@ -2,3 +2,4 @@ fasta/
 fastq/
 bam/
 vcf/
+vcf_plots/

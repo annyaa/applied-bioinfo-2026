@@ -4,20 +4,61 @@ In week 5,we aligned reads to the dengue virus type 1 genome and created a BAM f
 
 Here, we call variants from that alignment and create a VCF file. 
 
-Call variants from the BAM file¶
-Ensure that you get at least 10x coverage of the genome.
-Write a Makefile that calls variants and creates a VCF file.
-Run a statistics report on the VCF file.
-Visualize the VCF file in IGV.
-Write a README.md that a reviewer can follow.
+
+## Calling variants from the BAM file
+Run the Makefile that calls variants and creates a VCF file by running the following in the teminal after activating ```bioinfo```:
+
+```
+make all
+```
 
 
-What to put in the README¶
- describe what you did and how to reproduce your results.
+## Visualize the VCF file in IGV.
+ Below are different views of the vcf file in igv
+
+![vcf1](images/vcf1.png)
+
+![vcf2](images/vcf2.png)
+
+![vcf3](images/vcf3.png)
+
+![vcf4](images/vcf4.png)
+
+![vcf5](images/vcf5.png)
+
+![vcf6](images/vcf6.png)
+
+## Run a statistics report on the VCF file.
+
+Run the following to view statistics on the variant calling process:
+
+```
+bcftools stats vcf/denv4_samp1.vcf.gz
+```
+
+To look at some of these statistics graphically, run the following:
+
+```
+bcftools stats vcf/denv4_samp1.vcf.gz > stats.txt
+plot-vcfstats stats.txt vcf/
+```
+This generates the following graphs:
+
+![vcf7](vcf_plots/tstv_by_qual.0.png)
+
+![vcf8](vcf_plots/substitutions.0.png)
+
+![vcf9](vcf_plots/depth.0.png)
+
+
+**Below are some details from the statistics report**
  
-How many variants were called?
-What kinds of variants are present?
+- Number of variants called (records): 701
+
+- Kinds of variants present: All **701** variants are SNPs
+
 Which calls look like true variants, and which look like errors?
 Are the calls supported by the alignments?
-Include the commands needed to run the Makefile and a screenshot of the VCF file in IGV.
+
+
 
