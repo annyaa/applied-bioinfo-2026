@@ -1,0 +1,6 @@
+# Pipeline data directories
+fasta/
+fastq/
+bam/
+vcf/
+gff/
