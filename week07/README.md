@@ -76,7 +76,8 @@ NC_001477.1    349    .    G    A    225.417    .    DP=97;AD=0,68;VDB=0.0045726
 NC_001477.1    355    .    A    G    225.417    .    DP=96;AD=0,67;VDB=0.00202655;SGB=-0.693147;MQSBZ=0;MQ0F=0;AC=2;AN=2;DP4=0,0,42,25;MQ=60   
 ```
 
-**Some interesting observations**
+**Some interesting observations:**
+
 Both the variant at position 112 and 355 have a reference base = A and alternative base = G. All variants shown have 225.417 reads covering the site. 
 
 ### **The calls like true variants (not errors).**
