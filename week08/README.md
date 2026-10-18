@@ -199,8 +199,48 @@ Variant: C
 **No change in amino acid**
 
 
+## Using snpEff software
+
+```
+pixi add snpeff bio
+# Dump the databases to a file.
+snpEff databases > database.txt
+cat database.txt | grep dengue
+```
+
+**There is no dengue entry. Thus we need to build a custom database. I do this below using Gemini assistance**
+
+```
+mkdir -p data/dengue
+
+# Confirm the directory exists
+Run ls -d data/dengue 
 
 
-Which variants did you annotate, and which gene does each one fall in?
-For each variant, what is the reference codon, the alternate codon, and the amino acid change?
-Include the commands needed to run the Makefile, a screenshot of one variant lined up with the translated coding sequence in IGV, and the software output for that variant.
+# Copy existing FASTA and GFF files into the new directory. 
+cp fasta/dengue_virus.fasta data/dengue/sequences.fa
+cp gff/dengue_virus.gff data/dengue/genes.gff
+
+#Verification: 
+ls data/dengue/ 
+
+#Create a snpEff.config file in main project directory to register the Dengue genome.
+printf "data.dir = ./data\ndengue.genome : Dengue Virus\n" > snpEff.config
+
+#Verification: 
+cat snpEff.config 
+
+#Run the build command, telling SnpEff to use your local config file (-c) and the GFF3 format (-gff3). The terminal will output a processing log. At the bottom, it should say Done. and you will see a new snpEffectPredictor.bin file inside your data/dengue/ folder.
+
+snpEff build -c snpEff.config -gff3 -v dengue
+
+#annotate variant file using the local config.
+snpEff -c snpEff.config dengue vcf/denv4_samp1.vcf.gz > vcf/denv4_samp1.annotated.vcf
+
+#Verification: to confirm the annotated file was generated and has a noticeably larger file size than the original.
+ls -lh vcf/denv4_samp1.annotated.vcf 
+```
+
+Below is the software output for the variant:
+
+![varpred14](images/varpred14.png)
