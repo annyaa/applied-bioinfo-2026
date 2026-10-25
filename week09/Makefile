@@ -34,8 +34,9 @@ BAM = bam/$(SAMPLE_NAME).bam
 # BWA index sentinel
 INDEX = $(GENOME_FASTA).bwt
 
-# The output VCF file.
+# The output VCF file including the version with all variants merged
 VCF=vcf/$(SAMPLE_NAME).vcf.gz
+MULTI_VCF=vcf/dengue_multisample.vcf.gz
 
 # Annotation parameters for the mpileup command
 ANN=-d 100 --annotate 'INFO/AD,FORMAT/DP,FORMAT/AD,FORMAT/ADF,FORMAT/ADR,FORMAT/SP'
@@ -137,18 +138,29 @@ $(VCF): $(BAM) $(GENOME_FASTA)
 all: gff $(VCF)
 	ls -lh $(VCF)
 
-# Run the workflow using the filtered design file.
-batch:
-	# Run the all target to make sure it works
-	make all
-
-	# Extract header, filter for GENOMIC, take 10 rows, pipe to parallel
+		
+# Run the workflow using the filtered design file to create a single VCF
+batch: genome gff
+	# 1. Run parallel, but ONLY to the 'align' target to generate BAMs
 	(head -n 1 ${DESIGN}; grep -i "GENOMIC" ${DESIGN} | head -n 10) | ${PARALLEL} \
 		make \
 		SRR={run_accession} \
 		SAMPLE_NAME={sample_alias} \
 		N=20000 \
-		all
+		align
+
+	# 2. Once all BAMs exist, run joint variant calling on all of them at once
+	# Note: ploidy is overridden to 1 for haploid viral genomes
+	mkdir -p vcf
+	bcftools mpileup ${ANN} -O u -f $(GENOME_FASTA) bam/*.bam | \
+		bcftools call --ploidy 1 --annotate 'FORMAT/GQ' -mv -O u | \
+		bcftools norm -f $(GENOME_FASTA) -d all -O u | \
+		bcftools sort --write-index -O z -o $(MULTI_VCF)
+		
+	ls -lh $(MULTI_VCF)
+		
+		
+		
 
 # Visualize with IGV
 igv: fastq align ${BAM} $(GFF)
