@@ -66,23 +66,44 @@ make batch
 
 ## call peaks
 
-single input sample
+Ensure `macs3` is added to `pixi`
+
+In the makefile, we used `ChIP-seq_Ishi_Ishi_E21hr_ER_B` so to call peaks on this single input sample (the makefile used `BKG = ChIP-seq_Ishi_Ishi_DMSO_Input`)
+
+Run the following:
 
 ```
-make peaks
+make SAMPLE=ChIP-seq_Ishi_Ishi_E21hr_ER_B peaks
 ```
 
 **run for all samples**
 
+There are two different controls used, specifically:
+
+- ChIP-seq_Ishi_Ishi_DMSO_Input (Control for the Ishikawa cell line samples)
+- ChIP-seq_Ishi_T47D_DMSO_Input (Control for the T47D cell line samples)  
+
+Thus, we have to use a dynamic approach to linking the background control. Here is the updated version in the makefile (created with help from Gemini):
+
 ```
-cat design.csv | parallel --eta --lb --colsep , --header : make SAMPLE={sample} peaks
+# Dynamically route to the correct background based on the sample name
+BKG = $(if $(findstring T47D,$(SAMPLE)),ChIP-seq_Ishi_T47D_DMSO_Input,ChIP-seq_Ishi_Ishi_DMSO_Input)
+
+# Background BAM file
+BAM_BKG = bam/$(BKG).bam
 ```
 
+Now, we can run on all treatment samples, keeping in mind this helpful note from Gemini to explain why it is necessary to filter out anything with "Input" in the:
 
-cat << 'EOF' > .gitignore
-fasta/
-fastq/
-bam/
-gff/
-bw/
-EOF
+*"ensure your parallel grep -v filter excludes both of them when calling peaks (an input cannot call peaks on itself)"
+
+```
+cat design.csv | grep -v "Input" | parallel --eta --lb --colsep , --header : make SAMPLE={sample_description} peaks
+```
+
+echo "peaks/" >> .gitignore
+
+
+$(GFF):
+    mkdir -p $(dir $@)
+    curl -fsSL $(GFF_URL) | gunzip | sort -k1,1 -k4,4n > $@

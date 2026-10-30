@@ -5,7 +5,7 @@ FASTA_URL = https://ftp.ensembl.org/pub/release-116/fasta/homo_sapiens/dna/Homo_
 GFF_URL = https://ftp.ensembl.org/pub/release-116/gff3/homo_sapiens/Homo_sapiens.GRCh38.116.chromosome.17.gff3.gz
 
 # Name of the reference genome
-NAME = hg38_chr3
+NAME = hg38_chr17
 
 # Genome fasta file
 FASTA = fasta/$(NAME).fa.gz
@@ -36,7 +36,11 @@ BW = bw/$(SAMPLE).bw
 INDEX = $(FASTA).bwt
 
 # Background sample name
-BKG = ChIP_Input
+BKG = ChIP-seq_Ishi_Ishi_DMSO_Input
+
+
+# Dynamically route to the correct background based on the sample name
+BKG = $(if $(findstring T47D,$(SAMPLE)),ChIP-seq_Ishi_T47D_DMSO_Input,ChIP-seq_Ishi_Ishi_DMSO_Input)
 
 # Background BAM file
 BAM_BKG = bam/$(BKG).bam
@@ -108,6 +112,7 @@ $(GFF):
 	curl -fsSL $(GFF_URL) | gunzip | sort -k1,1 -k4,4n | bgzip > $@
 	tabix -p gff $@
 
+
 # Download the fastq files.
 fastq: $(R1)
 	@ls -lh $(R1)
@@ -139,6 +144,7 @@ ${BW}: $(BAM)
 	bamCoverage --binSize 1 --bam $< -o $@
 
 $(PEAKS): $(BAM)
+	mkdir -p peaks
 	macs3 callpeak --broad -g 3E8 --broad-cutoff 0.01 -n $(SAMPLE) -t ${BAM} -c ${BAM_BKG} --outdir peaks
 
 peaks: $(PEAKS)
@@ -153,7 +159,7 @@ igv:
 	echo "genome ${DIR}/$(FASTA)" | ${NC}
 	echo "load ${DIR}/$(GFF)" | ${NC}
 	# Loads up the coverage files for each sample.
-	cat $(DESIGN) | $(PARALLEL) 'echo "load ${DIR}/bw/{sample}.bw" | ${NC}'
+	cat $(DESIGN) | $(PARALLEL) 'echo "load ${DIR}/bw/{sample_description}.bw" | ${NC}'
 
 batch:
 	cat $(DESIGN) | $(PARALLEL) make SRR={run_accession} SAMPLE={sample_description} all
