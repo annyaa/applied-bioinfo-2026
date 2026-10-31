@@ -151,10 +151,9 @@ Below, we load the coverage tracks and the peak files generated for each sample 
 
 ![chip17](images/chip17.png)
 
+### Below we can see that unlike the above illustrations, there are consistent peaks.
+
 ![chip18](images/chip18.png)
 
 ![chip19](images/chip19.png)
 
-How many peaks were called in each sample?
-How consistent are the peak calls within replicates? Show one region where the replicates agree and one region where they do not.
-Include screenshots of both regions from IGV.
