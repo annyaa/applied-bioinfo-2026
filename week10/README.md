@@ -1,48 +1,42 @@
 # Generate peak calls for ChIP-Seq/ATAC seq
 
+This week, we reuse a previously built a pipeline that calls variants for many samples from a design file. However, for sequencing data, we select ChIP-seq or ATAC-seq, and replace the variant call with peak calling.
 
-https://aacrjournals.org/cancerres/article/80/6/1234/647756/ETV4-Is-Necessary-for-Estrogen-Signaling-and
 
-https://www.ncbi.nlm.nih.gov/bioproject/?term=GSE129803 
+## Selected Project summary
 
-## Find a BioProject with ChIP-seq or ATAC-seq reads for the genome you have been using. The project should have at least two replicates in both groups.
+The project used in building the prior pipeline did not have CHIP-Seq/ ATAC-seq data, so I have selected a new project.
+The project is based on a paper by [Rodriguez et al(2020)](https://aacrjournals.org/cancerres/article/80/6/1234/647756/ETV4-Is-Necessary-for-Estrogen-Signaling-and) titled **"ETV4 Is Necessary for Estrogen Signaling and Growth in Endometrial Cancer Cells"**
 
-- Bioproject: **PRJNA532875**
+The goal of the project is to enhance understanding of the molecular mechanisms benind the role the estrogen receptor alpha (ER) plays in regulating endometrial cancer. Specifically, the aim is to understand the transcription factors that control genomic binding of the ER in endometrial cancer cells 
+
+The [Bioproject](https://www.ncbi.nlm.nih.gov/bioproject/?term=GSE129803) for this study is **PRJNA532875**.
+
+We focus on analyzing **ChIP-seq** data from NCBI using the accession GSE129803 but RNA-seq (GSE129804) and ATAC-seq (GSE129802) data are also available.
+
+The project used the following cells:
+
+- Ishikawa cells - endometrial carcinoma 
+- T-47D cells - breast carcinoma
+
+Treatments involved:
+
+- Control: DMSO
+- ChIP-seq: 10 nmol/L E2 for 1 hour 
+
+The authors performed ChIP-seq to map ER genomic binding in 5 endometrial cancer xenografts and combined this data with published ER ChIP-seq data sets to obtain 9 breast tumors and 10 endometrial tumors in total. 
+
+**Main finding from the study:** The authoprs concluded that the transcription factor ETV4 is important for estrogen signaling in endometrial cancer cells.
+
+
+## Reproducing the workflow
 
 Create the design file
 ```
-bio search -H -csv PRJNA532875 > runinfo.csv
+bio search -H -csv PRJNA532875 > design.csv
 ```
 
-**ETV4 is found on chromosome 17**
-
-
-### reproduce workflow
-run `make all` in an environment with `deeptools`
-
-verify that all sequences are chipseq and rename runinfo to design.csv since it will work as the design file
-
-
-Create a design.csv describing the samples and their groups.
-Generate peak calls for each sample.
-Load the coverage tracks and the peak files in IGV and compare the calls within each replicate group.
-Write a README.md that a reviewer can follow.
-Implementation suggestions:
-
-Since peak calling requires both a background and a condition you might want to add a background target to the Makefile to process the background samples. Many solutions are possible here.
-
-make background could run the workflow for the background samples.
-make peaks could call peaks for a condition relative to the background.
-It is not required to do it this way. It is just a suggestion.
-
-
-## README CONTENTS
-
-Summarize the project: the assay, the organism, how many samples, and what the control and the condition are.
-Describe how to run the workflow so a reviewer can reproduce it.
-How many peaks were called in each sample?
-How consistent are the peak calls within replicates? Show one region where the replicates agree and one region where they do not.
-Include screenshots of both regions from IGV.
+Since **ETV4 is found on chromosome 17**, download the genome sequence of chromosome 17 from the Ensembl FTP server.
 
 **single sample**
 
@@ -50,14 +44,14 @@ Include screenshots of both regions from IGV.
 make all
 ```
 
-**try ano0ther sample**
+**try a different sample from the one specified in makefile**
 
 ```
 # Run each sample separately.
-make SRR=SRR8896964 SAMPLE=ChIP-seq_Ishi_T47D_DMSO_Input all
+make SRR=SRR8896964 SAMPLE=ChIP-seq_Ishi_ETV4KO1_E21hr_ER_B all
 ```
 
-after testing that it works on a different sample, run on all samples
+**After testing that the makefile works on a different sample, run on all samples**
 
 ```
 # Run the batch target
@@ -68,9 +62,9 @@ make batch
 
 Ensure `macs3` is added to `pixi`
 
-In the makefile, we used `ChIP-seq_Ishi_Ishi_E21hr_ER_B` so to call peaks on this single input sample (the makefile used `BKG = ChIP-seq_Ishi_Ishi_DMSO_Input`)
+**single sample**
 
-Run the following:
+In the makefile, we used `ChIP-seq_Ishi_Ishi_E21hr_ER_B` so to call peaks on this single input sample, the specify `BKG = ChIP-seq_Ishi_Ishi_DMSO_Input` in the makefile and run:
 
 ```
 make SAMPLE=ChIP-seq_Ishi_Ishi_E21hr_ER_B peaks
@@ -93,17 +87,74 @@ BKG = $(if $(findstring T47D,$(SAMPLE)),ChIP-seq_Ishi_T47D_DMSO_Input,ChIP-seq_I
 BAM_BKG = bam/$(BKG).bam
 ```
 
-Now, we can run on all treatment samples, keeping in mind this helpful note from Gemini to explain why it is necessary to filter out anything with "Input" in the:
+Now, we can run on all treatment samples, keeping in mind this helpful note from Gemini to explain why it is necessary to filter out anything with "Input" in peak calling:
 
-*"ensure your parallel grep -v filter excludes both of them when calling peaks (an input cannot call peaks on itself)"
+*"ensure your parallel grep -v filter excludes both of them when calling peaks (an input cannot call peaks on itself)"*
 
 ```
 cat design.csv | grep -v "Input" | parallel --eta --lb --colsep , --header : make SAMPLE={sample_description} peaks
 ```
 
-echo "peaks/" >> .gitignore
+## Peak calling results
 
+Below, we load the coverage tracks and the peak files generated for each sample in IGV and compare the calls within each replicate group.
 
-$(GFF):
-    mkdir -p $(dir $@)
-    curl -fsSL $(GFF_URL) | gunzip | sort -k1,1 -k4,4n > $@
+### Initial view after loading coverage files in igv:
+
+![chip1](images/chip1.png)
+
+### Apply distinct coloring to identify locations of interest:
+
+![chip2](images/chip2.png)
+
+![chip3](images/chip3.png)
+
+### Initial view after loading peak files
+
+![chip10](images/chip10.png)
+
+![chip11](images/chip11.png)
+
+### Coverage at position 23,579,698 - 59,6777,745
+
+![chip4](images/chip4.png)
+
+![chip5](images/chip5.png)
+
+### Peaks at 23,312,084 - 59,945,357
+
+![chip12](images/chip12.png)
+
+![chip13](images/chip13.png)
+
+### Coverage at position 41,346,707 - 41,910,738
+
+![chip6](images/chip6.png)
+
+![chip7](images/chip7.png)
+
+### Peaks at 41,342,524 - 41,914,918
+
+![chip14](images/chip14.png)
+
+![chip15](images/chip15.png)
+
+### Position 41,619,909 - 41,637,534
+
+![chip8](images/chip8.png)
+
+![chip9](images/chip9.png)
+
+### Peaks at 41,619,778 - 41,637,664
+
+![chip16](images/chip16.png)
+
+![chip17](images/chip17.png)
+
+![chip18](images/chip18.png)
+
+![chip19](images/chip19.png)
+
+How many peaks were called in each sample?
+How consistent are the peak calls within replicates? Show one region where the replicates agree and one region where they do not.
+Include screenshots of both regions from IGV.
