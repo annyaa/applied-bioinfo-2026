@@ -14,7 +14,7 @@ Use the links below to navigate to the directories for each week of BMMB 852:
 * [Week 8: Interpret a multisample VCF file](./week08)
 * [Week 9: Create an automated workflow](./week09)
 * [Week 10: Generate peak calls for ChIP-Seq/ATAC seq](./week10)
-* [Week 11: Topic TBD](./week11)
+* [Week 11: Evaluate gene expression coverages](./week11)
 * [Week 12: Topic TBD](./week12)
 * [Week 13: Topic TBD](./week13)
 * [Week 14: Topic TBD](./week14)
