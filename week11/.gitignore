@@ -1,0 +1,8 @@
+# Pipeline data directories
+fasta/
+fastq/
+bam/
+bw/
+counts/
+gtf/
+.DS_Store
