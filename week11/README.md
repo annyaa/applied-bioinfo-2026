@@ -1,14 +1,16 @@
 # Evaluate gene expression coverages
 
-Load the chr22.genome.fa reference genome.
-Load each of the coverage files for the samples.
-Color samples by type, using the same color for replicates.
-Load the gtf/chr22.gtf GTF file.
+Preparing files for analysis: 
+
+- Load the chr22.genome.fa reference genome.
+- Load each of the coverage files for the samples.
+- Color samples by type, using the same color for replicates.
+- Load the gtf/chr22.gtf GTF file.
 
 
 ## Look at a wide region (millions of bases wide). How are the two sample types different?
 
-based on a look at chr22:19,819,203-30,999,265, there seems to be high within-group/type similarity but very low between groups
+Based on a look at chr22:19,819,203-30,999,265, there seems to be high within-group/type similarity but very low between groups.
 
 ![rna](images/rna.png)
 
@@ -45,10 +47,10 @@ based on a look at chr22:19,819,203-30,999,265, there seems to be high within-gr
 
 ## Find a gene that is not expressed in any of the samples.
 
-between region chr22:10,930,921-15,303,288, there are two genes **(CU459202.1 and CU463998.1)** not expressed in any sample
-
+Between region chr22:10,930,921-15,303,288, there are two genes **(CU459202.1 and CU463998.1)** not expressed in any sample
 
 ![rna8](images/rna8.png)
+
 
 ## Find a gene that is very strongly expressed in all samples. What is its coverage?
 
@@ -57,12 +59,12 @@ Gene_name: SNRPD3
 ![rna9](images/rna9.png)
 
 Coverage From featureCount txt files:
-HBR_1: 68
-HBR_2: 86
-HBR_3: 94
-UHR_1: 291
-UHR_2: 206
-UHR_3: 253
+- HBR_1: 68
+- HBR_2: 86
+- HBR_3: 94
+- UHR_1: 291
+- UHR_2: 206
+- UHR_3: 253
 
 
 ## Can you identify the transcripts that are expressed? Sometimes you can only exclude some candidates.
@@ -70,7 +72,8 @@ UHR_3: 253
 ![rna10](images/rna10.png)
 
 Two transcripts identified: 
-- a retained intron - transcript_name: SNRPD3-002, transcript_id: ENST00000468770.1
+- A retained intron:
+    - Transcript name: SNRPD3-002; ID: ENST00000468770.1
 - Two protein coding sequences, namely:
     - Transcript name: SNRPD3-001; ID: ENST00000215829.7
     - Transcript name: SNRPD3-003, ID: ENST00000402849.5
@@ -80,13 +83,15 @@ Two transcripts identified:
 
 ![rna11](images/rna11.png)
 
-gene_name: RTN4R; ID: ENSG00000040608.13, type: protein_coding
-transcript_name: RTN4R-006; id: ENST00000469601.1; type: processed_transcript
-transcript_status: KNOWN
+Gene name: RTN4R; ID: ENSG00000040608.13, type: protein_coding
 
-HBR_1: 73 vs UHR_1: 18
-HBR_2: 92 vs UHR_2: 10
-HBR_3: 83 vs UHR_3: 11
+Transcript name: RTN4R-006; ID: ENST00000469601.1; type: processed_transcript
+
+- HBR_1: 73 vs UHR_1: 18
+
+- HBR_2: 92 vs UHR_2: 10
+
+- HBR_3: 83 vs UHR_3: 11
 
 
 ## Is the transcript upregulated or downregulated?
